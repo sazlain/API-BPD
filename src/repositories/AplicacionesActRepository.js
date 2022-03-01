@@ -14,10 +14,19 @@ const AplicacionesActRepository = {
         }
 
         if (filter.inputFilterText) {
-            q = q + " and paa.DESCRIPCION like '%" + filter.inputFilterText + "%'"
+            q = q + " and paa.DESCRIPCION rlike";
+            const filterWords = filter.inputFilterText.split(' ');
+            filterWords.forEach((word, index) => {
+                if (index == 0) {
+                    q = q + " ('.*" + word + "')";
+                } else {
+                    q = q + "|('.*" + word + "')";
+                }
+
+            })
+
         }
 
-        console.log('/*********************', q)
         return sequelize.query(q, { type: sequelize.QueryTypes.SELECT });
     },
     post: () => { }
