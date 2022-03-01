@@ -1,5 +1,6 @@
 const express = require('express');
 const { sequelize, QueryTypes } = require('../config/Db');
+const AplicacionesActRepository = require('../repositories/AplicacionesActRepository')
 const app = express.Router();
 
 
@@ -60,6 +61,7 @@ const getApplicationsBrands = async () => {
 
 const getApplicationsModels = async (brand) => {
     const models = [];
+
     const applicationsMarketplace = await getApplicationsMarketplace();
 
     applicationsMarketplace.forEach((item) => {
@@ -75,8 +77,20 @@ const getApplicationsModels = async (brand) => {
     });
 
     models.sort();
-
     return models;
+}
+
+const getApplicationsModelsByBrand = async (brand) => {
+
+    const models = await AplicacionesActRepository.getModelsByBrand(brand);
+    return models;
+
+}
+
+const getFilteredPartsList = async (filter) => {
+    const list = await AplicacionesActRepository.getFilteredPartsList(filter);
+    return list;
+
 }
 
 app.get('/applications-marketplace', async (req, res) => {
@@ -113,9 +127,15 @@ app.get('/applications-brands', async (req, res) => {
 
 app.get('/applications-models', async (req, res) => {
 
-    const applicationsModels = await getApplicationsModels();
-
+    const applicationsModels = await getApplicationsModelsByBrand(req.query.brand);
     res.json(applicationsModels);
+
+});
+
+app.get('/filtered-parts-list', async (req, res) => {
+
+    const filteredPartsList = await getFilteredPartsList(req.query);
+    res.json(filteredPartsList);
 
 });
 
