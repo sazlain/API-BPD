@@ -14,17 +14,25 @@ const AplicacionesActRepository = {
         }
 
         if (filter.inputFilterText) {
-            q = q + " and paa.DESCRIPCION rlike";
+            q = q + " and paa.DESCRIPCION rlike ('";
             const filterWords = filter.inputFilterText.split(' ');
-            filterWords.forEach((word, index) => {
-                if (index == 0) {
-                    q = q + " ('.*" + word + "')";
-                } else {
-                    q = q + "|('.*" + word + "')";
-                }
+            if (filterWords.length == 1) {
+                q = q + "(.*" + filterWords[0] + ")";
+            } else {
 
-            })
+                filterWords.forEach((word, index) => {
+                    if (index == 0) {
+                        q = q + "(.*" + word + ")";
+                    } else {
+                        q = q + "|(.*" + word + ")";
+                    }
 
+
+
+                })
+            }
+
+            q = q + "')";
         }
 
         return sequelize.query(q, { type: sequelize.QueryTypes.SELECT });
