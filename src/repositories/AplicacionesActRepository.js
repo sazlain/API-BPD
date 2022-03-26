@@ -1,5 +1,5 @@
 const { sequelize } = require('../config/Db');
-const Querys = require('../../querys')
+const Querys = require('../../src/resources/querys')
 
 const AplicacionesActRepository = {
     getModelsByBrand: (brand) => {
