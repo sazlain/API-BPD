@@ -5,7 +5,9 @@ module.exports = CONSTANTS = {
     PRO_UID: "51619574156c9451f180a57008793936",
     WORKFLOW_API_REST: {
         VALIDATE_EXISTENCE: "/query_ajax_Validar_Mail_AP_POST.php",
-        UPDATE_PRERESERVA: "/query_ajax_Actualizar_PreReserva_AP_POST.php"
+        UPDATE_PRERESERVA: "/query_ajax_Actualizar_PreReserva_AP_POST.php",
+        SAVE_CLIENT: "/query_ajax_Validar_Mail_AP_POST.php",
+        RETURN_ITEMS: "/sysworkflow/en/neoclassic/51619574156c9451f180a57008793936/RETURN_FORMPost.php",
     },
     TG_PRE_CARGA_VENDEDOR: "34848528056f23d921ff933055205846",
     TG_ACTUALIZAR_TITULO_CASO: "851701420572e45e89685e7015671239",
