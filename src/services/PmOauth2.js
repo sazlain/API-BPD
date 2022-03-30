@@ -43,6 +43,8 @@ module.exports = PmOauth2 = {
             headers: { 'Content-type': 'application/json' },
         }).then((res) => {
             return res.data
+        }).catch((err) => {
+            console.log('ERROR:' + JSON.stringify(err.response.data))
         });
 
         return token;

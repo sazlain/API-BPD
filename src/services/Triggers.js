@@ -12,6 +12,7 @@ module.exports = Triggers = {
             return res.data
         }).catch((err) => {
             console.log(err.response.data)
+            return err.response.data
         });
 
         return response;
@@ -26,6 +27,7 @@ module.exports = Triggers = {
             return res.data
         }).catch((err) => {
             console.log(err.response.data)
+            return err.response.data
         });
 
         return response;
@@ -40,6 +42,22 @@ module.exports = Triggers = {
             return res.data
         }).catch((err) => {
             console.log(err.response.data)
+            return err.response.data
+        });
+
+        return response;
+    },
+    TG_POST_RETURN: async (appUid) => {
+
+        const response = await axios({
+            url: CONSTANTS.WORKFLOW_BASE_URL + CONSTANTS.WORKFLOW_API_PATH + CONSTANTS.WORKFLOW_WORKSPACE + "/cases/" + appUid + "/execute-trigger/" + CONSTANTS.TG_POST_RETURN,
+            method: 'put',
+            headers: { 'Authorization': 'Bearer ' + token.access_token }
+        }).then((res) => {
+            return res.data
+        }).catch((err) => {
+            console.log(err.response.data)
+            return err.response.data
         });
 
         return response;
