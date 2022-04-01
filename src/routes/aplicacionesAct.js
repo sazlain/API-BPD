@@ -80,10 +80,17 @@ const getApplicationsModels = async (brand) => {
     return models;
 }
 
-const getApplicationsModelsByBrand = async (brand) => {
+const getApplicationsModelsByBrand = async (data) => {
 
-    const models = await AplicacionesActRepository.getModelsByBrand(brand);
+    const models = await AplicacionesActRepository.getModelsByBrand(data);
     return models;
+
+}
+
+const getApplicationsBrandsByYear = async (data) => {
+
+    const brands = await AplicacionesActRepository.getBrandsByYear(data);
+    return brands;
 
 }
 
@@ -125,18 +132,23 @@ app.get('/applications-brands', async (req, res) => {
 
 });
 
-app.get('/applications-models', async (req, res) => {
+app.post('/applications-models', async (req, res) => {
 
-    const applicationsModels = await getApplicationsModelsByBrand(req.query.brand);
+    const applicationsModels = await getApplicationsModelsByBrand(req.body);
     res.json(applicationsModels);
 
 });
 
-app.get('/filtered-parts-list', async (req, res) => {
+app.post('/filtered-parts-list', async (req, res) => {
 
-    const filteredPartsList = await getFilteredPartsList(req.query);
+    const filteredPartsList = await getFilteredPartsList(req.body);
     res.json(filteredPartsList);
 
+});
+
+app.post('/brandsByYear', async (req, res) => {
+    const brands = await getApplicationsBrandsByYear(req.body);
+    res.json(brands);
 });
 
 module.exports = app;
