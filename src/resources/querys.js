@@ -28,7 +28,7 @@ module.exports = QUERY_STRING = {
         "where SPLIT_STR(paa.APLICACION,' ', 2) = '@@brand' " +
         "AND (TRIM(CONCAT(SPLIT_STR(paa.APLICACION,' ', 3),' ', SPLIT_STR(paa.APLICACION,' ', 4),' ', SPLIT_STR(paa.APLICACION,' ', 5),' ', " +
         "SPLIT_STR(paa.APLICACION,' ', 6)))) = '@@model' " +
-        "and pm.QTY > 0 " +
+        "and pr.EXISTENCIA > 0 " +
         "and pm.MARKETPLACE = '004' " +
         "and pm.REGION = '@@region' " +
         "and pm.STATUS = 1 " +
