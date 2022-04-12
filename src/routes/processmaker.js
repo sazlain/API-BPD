@@ -22,11 +22,6 @@ app.post('/pm/create-case', async (req, res) => {
     res.json(response);
 });
 
-app.post('/pm/return-items', async (req, res) => {
-    const response = await ProcessMakerRepository.returnItems(req.body)
-    res.json(response);
-});
-
 app.post('/pm/pre-return', async (req, res) => {
     const response = await ProcessMakerRepository.preReturn(req.body)
     res.json(response);

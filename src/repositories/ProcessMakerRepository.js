@@ -93,6 +93,8 @@ const ProcessMakerRepository = {
     },
     createCase: async (data) => {
 
+        console.log('token.access_token', token.access_token)
+
         data.pro_uid = CONSTANTS.PRO_UID;
 
         const response = await axios({
@@ -120,31 +122,6 @@ const ProcessMakerRepository = {
         });
 
         return response;
-    },
-    returnItems: async (data) => {
-
-        const formData = new FormData();
-
-        // Append any plain string values to the request
-        formData.append("firstString", JSON.stringify(data));
-        //formData.append("anotherString", "bar");
-
-        const headers = {
-            ...formData.getHeaders(),
-            "Content-Length": formData.getLengthSync()
-        };
-
-        console.log(formData)
-
-        /*const response = await axios.post(CONSTANTS.WORKFLOW_BASE_URL + CONSTANTS.WORKFLOW_API_REST.UPDATE_PRERESERVA, params, { headers }).then((res) => {
-            return res.data
-        }).catch((err) => {
-            console.log(err.response.data)
-        });
-
-        return response;*/
-
-        return data;
     }
 }
 
