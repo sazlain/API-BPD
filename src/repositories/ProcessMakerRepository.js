@@ -93,8 +93,6 @@ const ProcessMakerRepository = {
     },
     createCase: async (data) => {
 
-        console.log('token.access_token', token.access_token)
-
         data.pro_uid = CONSTANTS.PRO_UID;
 
         const response = await axios({
