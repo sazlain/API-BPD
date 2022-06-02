@@ -27,7 +27,7 @@ module.exports = QUERY_STRING = {
         "INNER JOIN PRE_RESERVA pr on pr.CODIGO = paa.CODIGO " +
         "where SPLIT_STR(paa.APLICACION,' ', 2) = '@@brand' " +
         "AND (TRIM(CONCAT(SPLIT_STR(paa.APLICACION,' ', 3),' ', SPLIT_STR(paa.APLICACION,' ', 4),' ', SPLIT_STR(paa.APLICACION,' ', 5),' ', " +
-        "SPLIT_STR(paa.APLICACION,' ', 6)))) = '@@model' " +
+        "SPLIT_STR(paa.APLICACION,' ', 6)))) like '@@model%' " +
         "and pr.EXISTENCIA > 0 " +
         "and pm.MARKETPLACE = '004' " +
         "and pm.REGION = '@@region' " +
