@@ -96,7 +96,29 @@ const getApplicationsBrandsByYear = async (data) => {
 
 const getFilteredPartsList = async (filter) => {
     const list = await AplicacionesActRepository.getFilteredPartsList(filter);
-    return list;
+    const seen = new Set();
+
+    const filteredArr = list.filter(el => {
+        const duplicate = seen.has(el.CODIGO);
+        seen.add(el.CODIGO);
+        return !duplicate;
+    });
+
+    return filteredArr;
+
+}
+
+const getFilteredPartsListPaginated = async (filter) => {
+    const list = await AplicacionesActRepository.getFilteredPartsListPaginated(filter);
+    const seen = new Set();
+
+    const filteredArr = list.filter(el => {
+        const duplicate = seen.has(el.CODIGO);
+        seen.add(el.CODIGO);
+        return !duplicate;
+    });
+
+    return filteredArr;
 
 }
 
@@ -142,6 +164,13 @@ app.post('/applications-models', async (req, res) => {
 app.post('/filtered-parts-list', async (req, res) => {
 
     const filteredPartsList = await getFilteredPartsList(req.body);
+    res.json(filteredPartsList);
+
+});
+
+app.post('/filtered-parts-list-paginated', async (req, res) => {
+
+    const filteredPartsList = await getFilteredPartsListPaginated(req.body);
     res.json(filteredPartsList);
 
 });
