@@ -35,6 +35,8 @@ PmOauth2.getToken().then((res) => {
     token = res;
     const curTime = new Date().getTime() / 1000;
     token.time = curTime;
+}).catch((e) => {
+    console.log("errro oauth2", e)
 });
 
 app.post('/', (req, res) => {

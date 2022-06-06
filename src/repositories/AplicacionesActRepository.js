@@ -40,7 +40,33 @@ const AplicacionesActRepository = {
 
         return sequelize.query(q, { type: sequelize.QueryTypes.SELECT });
     },
-    post: () => { }
+    getFilteredPartsListPaginated: (filter) => {
+        let q = Querys.GET_APPLICATION_PART_LIST_NEW.replace('@@year', filter.year).replace('@@region', filter.region).replace('@@brand', filter.brand).replace('@@model', filter.model);
+
+        if (filter.inputFilterText) {
+            q = q + " and paa.DESCRIPCION rlike ('";
+            const filterWords = filter.inputFilterText.split(' ');
+            if (filterWords.length == 1) {
+                q = q + "(.*" + filterWords[0] + ")";
+            } else {
+
+                filterWords.forEach((word, index) => {
+                    if (index == 0) {
+                        q = q + "(.*" + word + ")";
+                    } else {
+                        q = q + "|(.*" + word + ")";
+                    }
+
+
+
+                })
+            }
+
+            q = q + "')";
+        }
+
+        return sequelize.query(q, { type: sequelize.QueryTypes.SELECT });
+    }
 }
 
 module.exports = AplicacionesActRepository;
